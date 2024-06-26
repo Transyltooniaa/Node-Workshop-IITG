@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1 style="position: relative;left: 45%;">Product List</h1>
+    <form action="/add-product" method="POST" style="position: relative;left: 38%;margin:50px;" class="inp">
+        <div>
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" name="name" required minlength="1">
+        </div>
+        <div>
+            <label for="price">Price (Rs):</label>
+            <input type="number" id="price" name="price" required min="0" step="10" style="position: relative;left: 55px;">
+        </div>
+        <button type="submit" class="submit">Add Product</button>
+    </form>
+    <ul>
+        <% if (products.length === 0) { %>
+            <li>
+                <div style="position: relative;left: 45%;">
+                No products available! 😭</li>
+            </div>
+        <% } else { %>
+            <% products.forEach((product, index) => { %>
+                <li>
+                    <div class="products">
+                        <%= product.name %> - $<%= product.price %>
+                     </div>
+                    <form action="/delete-product/<%= index %>" method="POST" style="display:inline;">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                </li>
+            <% }); %>
+        <% } %>
+    </ul>
+</body>
+</html>
